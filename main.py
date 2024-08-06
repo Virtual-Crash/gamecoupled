@@ -1,4 +1,11 @@
 import time
+import sys
+from species import pick_species
+
+sys.path.insert(0, '/charbuild')
+
+
+
 
 
 #Game into
@@ -14,10 +21,7 @@ def delay_print(s):
 
 #Get some usr data
 
-username = input("What name do you give yourself? ")
-userspecies = input("Pick your species: Mouse, Toad, or Bird")
+user_name = input("What name do you give yourself? ")
+user_species = ""
 
-
-while userspecies != "Mouse" or "Toad" or "Bird":
-    userspecies = input("Dont be sassy with me, choose your species: Mouse, Toad, or Bird")
-
+pick_species(user_species)
