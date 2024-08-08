@@ -15,9 +15,9 @@ def delay_print(s):
 #Get some usr data
 
 username = input("What name do you give yourself?\n>")
-user_species = ""
+tmp_species = ""
 
-pick_species(user_species)
+user_species = pick_species(tmp_species)
 
 to_fight = input("What do you want to fight? (Mouse, Toad, Bird)\n>")
 
