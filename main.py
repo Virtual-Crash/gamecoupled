@@ -1,5 +1,5 @@
 import time
-
+from species import pick_species
 
 #Game into
 
@@ -15,11 +15,9 @@ def delay_print(s):
 #Get some usr data
 
 username = input("What name do you give yourself?\n>")
-userspecies = input("Pick your species: Mouse, Toad, or Bird\n>")
+tmp_species = ""
 
-
-while userspecies not in ["Mouse", "Toad", "Bird"]:
-    userspecies = input("Dont be sassy with me, Pick your species: Mouse, Toad, or Bird\n>")
+user_species = pick_species(tmp_species)
 
 to_fight = input("What do you want to fight? (Mouse, Toad, Bird)\n>")
 
@@ -33,25 +31,30 @@ def lose():
 def tie():
     print(f"Whoa {username} You tied!")
 
-
-if userspecies == "Mouse":
-    if to_fight == "Bird":
-        win()
-    elif to_fight == "Toad":
-        lose()
-    elif to_fight == "Mouse":
-        tie()
-elif userspecies == "Toad":
-    if to_fight == "Bird":
-        lose()
-    elif to_fight == "Toad":
-        tie()
-    elif to_fight == "Mouse":
-        win()
-elif userspecies == "Bird":
-    if to_fight == "Bird":
-        tie()
-    elif to_fight == "Toad":
-        win()
-    elif to_fight == "Mouse":
-        lose()
+def battle(user_species, to_fight):
+    #can get here, but missing user species
+    print(user_species + " vs " + to_fight)
+    if user_species == "Mouse":
+        print('1')
+        if to_fight == "Bird":
+            win()
+        elif to_fight == "Toad":
+            lose()
+        elif to_fight == "Mouse":
+            tie()
+    elif user_species == "Toad":
+        if to_fight == "Bird":
+            lose()
+        elif to_fight == "Toad":
+            tie()
+        elif to_fight == "Mouse":
+            win()
+    elif user_species == "Bird":
+        if to_fight == "Bird":
+            tie()
+        elif to_fight == "Toad":
+            win()
+        elif to_fight == "Mouse":
+            lose()
+            
+battle(user_species, to_fight)
