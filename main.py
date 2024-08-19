@@ -1,19 +1,21 @@
 import time
 from species import pick_species
 
-#Game into
+#Game into 
 
-#lameintro?
-hashi = "##################"
+#Get some usr data 
 
-
-def delay_print(s):
-    for c in hashi:
-        print(c, end='')
-        time.sleep(.25)
-
-#Get some usr data
-
+#dict is showing up under print statement
+user_data_dict = {
+    "username" : "",
+    "species" : "",
+    "stats" : {
+        "attack" : 0,
+        "defense" : 0,
+        "hp" : 0
+    }
+}
+    
 username = input("What name do you give yourself?\n>")
 tmp_species = ""
 battle_level = input("What difficulty of battle do you want to play? (Easy, Hard)\n>")
@@ -34,12 +36,40 @@ def pick_game (difficulty):
         difficulty = input("Please select correct difficulty: (Easy, Hard)\n>")
         pick_game(difficulty)    
 
+# Rock / Paper / Scissors style | 'Easy' game
+
 def win():
     print(f"Congratulations on your stunning victory {username}")
 def lose():
     print(f"{username} you have lost...")
 def tie():
     print(f"Whoa {username} You tied!")
+
+def quick_battle(user_species, to_fight):
+    print(user_species + " vs " + to_fight)
+    if user_species == "Mouse":
+        if to_fight == "Bird":
+            win()
+        elif to_fight == "Toad":
+            lose()
+        elif to_fight == "Mouse":
+            tie()
+    elif user_species == "Toad":
+        if to_fight == "Bird":
+            lose()
+        elif to_fight == "Toad":
+            tie()
+        elif to_fight == "Mouse":
+            win()
+    elif user_species == "Bird":
+        if to_fight == "Bird":
+            tie()
+        elif to_fight == "Toad":
+            win()
+        elif to_fight == "Mouse":
+            lose()    
+
+# Battle with stats
 
 stats = {
     "Mouse": {
@@ -78,6 +108,7 @@ def battle_with_stats(user_species, to_fight):
     user_stats = stats[user_species]
     enemy_stats = stats[to_fight]
     multiplier = 1 # default multiplier
+    rounds = 1
 
     if user_species == "Mouse":
         if to_fight == "Bird":
@@ -98,28 +129,16 @@ def battle_with_stats(user_species, to_fight):
     enemy_stats = take_damage(enemy_stats, damage_dealt)
     print(f'You have done {damage_dealt}, the enemy has {enemy_stats["hp"]} hp remaining')
     
-def quick_battle(user_species, to_fight):
-    print(user_species + " vs " + to_fight)
-    if user_species == "Mouse":
-        if to_fight == "Bird":
-            win()
-        elif to_fight == "Toad":
-            lose()
-        elif to_fight == "Mouse":
-            tie()
-    elif user_species == "Toad":
-        if to_fight == "Bird":
-            lose()
-        elif to_fight == "Toad":
-            tie()
-        elif to_fight == "Mouse":
-            win()
-    elif user_species == "Bird":
-        if to_fight == "Bird":
-            tie()
-        elif to_fight == "Toad":
-            win()
-        elif to_fight == "Mouse":
-            lose()
+    while enemy_stats["hp"] > 0:
+        rounds += 1
+        damage_dealt = do_damage(user_stats["attack"] * multiplier, enemy_stats["defense"])
+        enemy_stats = take_damage(enemy_stats, damage_dealt)
+        print(f'You have done {damage_dealt}, the enemy has {enemy_stats["hp"]} hp remaining')
+
+
+         
+    
+
+#Calling on the game to start
 
 pick_game(battle_level)            
