@@ -16,13 +16,23 @@ def delay_print(s):
 
 username = input("What name do you give yourself?\n>")
 tmp_species = ""
-
+battle_level = input("What difficulty of battle do you want to play? (Easy, Hard)\n>")
+        
 user_species = pick_species(tmp_species)
 
 to_fight = input("What do you want to fight? (Mouse, Toad, Bird)\n>")
 
 while to_fight not in ["Mouse", "Toad", "Bird"]:
     to_fight = input("Don't be sassy with me, What do you want to fight? (Mouse, Toad, Bird)\n>")
+
+def pick_game (difficulty):
+    if difficulty == "Hard":
+        battle_with_stats(user_species, to_fight)
+    elif difficulty == "Easy":
+        quick_battle(user_species, to_fight)
+    else :
+        difficulty = input("Please select correct difficulty: (Easy, Hard)\n>")
+        pick_game(difficulty)    
 
 def win():
     print(f"Congratulations on your stunning victory {username}")
@@ -88,11 +98,9 @@ def battle_with_stats(user_species, to_fight):
     enemy_stats = take_damage(enemy_stats, damage_dealt)
     print(f'You have done {damage_dealt}, the enemy has {enemy_stats["hp"]} hp remaining')
     
-def battle(user_species, to_fight):
-    #can get here, but missing user species
+def quick_battle(user_species, to_fight):
     print(user_species + " vs " + to_fight)
     if user_species == "Mouse":
-        print('1')
         if to_fight == "Bird":
             win()
         elif to_fight == "Toad":
@@ -113,5 +121,5 @@ def battle(user_species, to_fight):
             win()
         elif to_fight == "Mouse":
             lose()
-            
-battle_with_stats(user_species, to_fight)
+
+pick_game(battle_level)            
