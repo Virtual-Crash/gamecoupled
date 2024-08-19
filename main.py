@@ -129,7 +129,7 @@ def battle_with_stats(user_species, to_fight):
     enemy_stats = take_damage(enemy_stats, damage_dealt)
     print(f'You have done {damage_dealt}, the enemy has {enemy_stats["hp"]} hp remaining')
     
-    while enemy_stats["hp"] > 0:
+    while enemy_stats["hp"] >= 0:
         rounds += 1
         damage_dealt = do_damage(user_stats["attack"] * multiplier, enemy_stats["defense"])
         enemy_stats = take_damage(enemy_stats, damage_dealt)
